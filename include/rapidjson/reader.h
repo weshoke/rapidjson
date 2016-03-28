@@ -150,6 +150,7 @@ enum ParseFlag {
     kParseCommentsFlag = 32,        //!< Allow one-line (//) and multi-line (/**/) comments.
     kParseNumbersAsStringsFlag = 64,    //!< Parse all numbers (ints/doubles) as strings.
     kParseTrailingCommasFlag = 128, //!< Allow trailing commas at the end of objects and arrays.
+	kParsePythonJson = 256,
     kParseDefaultFlags = RAPIDJSON_PARSE_DEFAULT_FLAGS  //!< Default parse flags. Can be customized by defining RAPIDJSON_PARSE_DEFAULT_FLAGS
 };
 
@@ -1167,7 +1168,7 @@ private:
                     significandDigit++;
                 }
         }
-        else if(RAPIDJSON_UNLIKELY(s.Peek() == 'I') || RAPIDJSON_UNLIKELY(s.Peek() == 'N'))
+        else if((parseFlags & kParsePythonJson) && (RAPIDJSON_UNLIKELY(s.Peek() == 'I') || RAPIDJSON_UNLIKELY(s.Peek() == 'N')))
 			useInfNan = true;
         else
             RAPIDJSON_PARSE_ERROR(kParseErrorValueInvalid, s.Tell());
