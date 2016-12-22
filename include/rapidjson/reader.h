@@ -34,6 +34,9 @@
 #include <emmintrin.h>
 #endif
 
+#include <limits>
+#include <cmath>
+
 #ifdef _MSC_VER
 RAPIDJSON_DIAG_PUSH
 RAPIDJSON_DIAG_OFF(4127)  // conditional expression is constant
